@@ -1,0 +1,36 @@
+{
+  "name": "common-agent-config",
+  "version": "1.0.0",
+  "description": "Shared agent configuration for noshiro-pf repositories",
+  "keywords": [],
+  "license": "ISC",
+  "author": "noshiro-pf",
+  "scripts": {
+    "fmt": "format-uncommitted",
+    "fmt:diff": "format-diff-from origin/main",
+    "fmt:full": "prettier --write .",
+    "gh:apply-all": "gh-apply-all",
+    "gh:apply-repository-settings": "gh-apply-repository-settings",
+    "gh:apply-rulesets": "gh-apply-rulesets",
+    "gh:apply-variables": "gh-apply-variables",
+    "gh:backup-all": "gh-backup-all",
+    "gh:backup-repository-settings": "gh-backup-repository-settings",
+    "gh:backup-rulesets": "gh-backup-rulesets",
+    "md": "markdownlint-cli2"
+  },
+  "devDependencies": {
+    "cspell": "^9.3.2",
+    "github-settings-as-code": "^1.0.6",
+    "markdownlint": "^0.39.0",
+    "markdownlint-cli2": "^0.19.0",
+    "prettier": "^3.6.2",
+    "prettier-plugin-organize-imports": "^4.3.0",
+    "prettier-plugin-packagejson": "^2.5.19",
+    "ts-repo-utils": "^7.8.2"
+  },
+  "packageManager": "pnpm@10.20.0",
+  "volta": {
+    "node": "25.0.0",
+    "npm": "11.6.2"
+  }
+}
