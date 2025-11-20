@@ -132,6 +132,7 @@ This organization makes the script easier to read and understand the execution f
     - readonly 型を徹底。
         - 配列は必ず `T[]` ではなく `readonly T[]` と readonly array にする。
         - ネストが深く `Readonly<*>` を書く量が多い場合には `DeepReadonly<{ a: { b: { c: number[] }}}>` のように `DeepReadonly` 型ユーティリティを用いることも検討する。
+    - object や配列の定数は `as const` 付きで定義する。
     - オブジェクトの直接変更を禁止し、引数や返値のミュータブル化を避ける（`functional/immutable-data` ルールでチェックされる）。
     - クラス継承や enum といった可変/部分的構造は原則排除。
 - モダン構文の強制
@@ -168,6 +169,43 @@ This organization makes the script easier to read and understand the execution f
     - `eval`，`Function`，動的 `require`, `import`，危険な正規表現は使用禁止。
     - `unicorn/*` でファイル命名、配列操作、最新 DOM/Node API の採用を強制し、`import-x/no-useless-path-segments` や `no-restricted-globals` で可読性とバグ低減を図る。
 
+#### なぜ Readonly を徹底するのか？
+
+```ts
+// ❌
+const t: [string, number] = ['a', 1];
+
+function f(x: number) {
+    if (typeof x !== 'number') throw new Error('Error!!');
+}
+
+t.reverse(); // [1, 'a']
+
+f(t[1]); // "Error!!" (but no type errors)
+```
+
+この例では `t` という mutable なタプルを reverse で反転させて `f` に渡しています。 `reverse` は破壊的メソッドであり、適用後は `t` の中身は `[1, 'a']` という値になっていますが、 `t` の型は `[string, number]` のままになってしまうという TypeScript の仕様があります[^TS-issue]。 `t[1]` は TypeScript 上は `number` 型であるにもかかわらずランタイムの値は `string` 型という不整合が生じ、 `f` を呼び出した時点でランタイムエラーになってしまいます。
+
+もしこれを以下のように readonly な型注釈をしていれば、破壊的メソッド `reverse` は readonly tuple である `t` に対して定義されていないため呼び出すことはできません。 代わりに非破壊メソッド `toReversed` を呼び出すしかありませんが、この結果は `(string | number)[]` という型に推論されるようになっているため、 「`string | number` は `number` に代入することができない」という型エラーが出てくれます。
+
+[^TS-issue]: https://github.com/microsoft/TypeScript/issues/52375
+
+```ts
+// ✅
+const t: readonly [string, number] = ['a', 1];
+
+function f(x: number) {
+    if (typeof x !== 'number') throw new Error('Error!!');
+}
+
+const r = t.toReversed(); // (string | number)[]
+
+f(r[1]);
+// Argument of type 'string | number' is not assignable to parameter of type 'number'.
+```
+
+これ以外にも、コード中の変数の大部分を immutable として扱うことができると見通しが良くなったり、 React のレンダリングにおいてオブジェクトの参照を変えずに内部を破壊的に変更してしまい描画されないなどの問題を防げたりなど、堅牢性の観点で様々なメリットがあります。
+
 ### Testing Approach
 
 Uses **Vitest** with dual testing strategy:
@@ -183,18 +221,168 @@ import { expectType } from '../expect-type.mjs';
 // Type-level assertion
 expectType<typeof result, readonly [0, 0, 0]>('=');
 // Runtime assertion
-expect(result).toStrictEqual([0, 0, 0]);
+assert.deepStrictEqual(result, [0, 0, 0]);
 ```
+
+The `expectType` utility provides a DSL for type assertions:
+
+- `"="`: Exact type equality
+- `"~="`: Mutual extension (A extends B and B extends A)
+- `"<="`: A extends B
+- `">="`: B extends A
+- `"!="`, `"!<="`, `"!>="`: Negated versions
+
+Use `expectType<A, B>('=')` whenever possible. Avoid using `expectType<A, B>('<=')` or `expectType<A, B>('!=')` except when intended.
 
 ## Testing Guidelines
 
 - Framework: Vitest with globals enabled.
 - Locations: place unit tests near sources or under `test/` using `*.test.mts`.
 - Coverage: keep meaningful coverage; exclude simple re-export files.
-- Run locally: `pnpm run test` or `pnpm run testw` during development.
+- Run locally: `pnpm run test` during development.
+
+## How To Fix Type Errors
+
+### `noUncheckedIndexedAccess` Related Issues
+
+This project uses TypeScript with the strict setting noUncheckedIndexedAccess: true , so the following code will result in a type error:
+
+```ts
+// ❌
+const xs: readonly number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+if (xs.length > 0) {
+    console.log(xs[0] * 2);
+    //          ~~~~~
+    //          Object is possibly 'undefined'.
+}
+```
+
+This error can be resolved as follows:
+
+```ts
+// ✅
+import { Arr } from 'ts-data-forge';
+
+const xs: readonly number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+if (Arr.isNonEmpty(xs)) {
+    console.log(xs[0] * 2);
+}
+```
+
+`isNonEmpty` is defined as follows:
+
+```ts
+type NonEmptyArray<A> = readonly [A, ...(readonly A[])];
+
+const isNonEmpty = <E>(array: readonly E[]): array is NonEmptyArray<E> =>
+    array.length > 0;
+```
+
+#### Early Return
+
+```ts
+// ❌
+const fn = (xs: readonly number[]): void => {
+    if (xs.length === 0) {
+        return;
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const first: number = xs[0]!;
+
+    // ...
+};
+```
+
+```ts
+// ✅
+const fn = (xs: readonly number[]): void => {
+    if (!Arr.isNonEmpty(xs)) {
+        return;
+    }
+
+    const first: number = xs[0];
+
+    // ...
+};
+```
+
+## How To Fix Lint Errors
+
+### functional/immutable-data / functional/no-let
+
+This disables mutation and encourages functional programming, but if you absolutely need to use mutable variables, you can avoid errors by adding the `mut_` prefix to the variable name.
+
+```ts
+// ❌
+
+// eslint-disable-next-line functional/no-let
+let temp = 0;
+
+temp = 2;
+
+const xs: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+// eslint-disable-next-line functional/immutable-data
+xs[0] = 100;
+```
+
+```ts
+// ✅
+
+let mut_temp = 0;
+
+mut_temp = 2;
+
+const mut_xs: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+// eslint-disable-next-line functional/immutable-data
+mut_xs[0] = 100;
+```
+
+### vitest/no-conditional-expect
+
+```ts
+expect(Result.isErr(result)).toBe(true);
+
+if (Result.isErr(result)) {
+    // error  Avoid calling `expect` inside conditional statements  vitest/no-conditional-expect
+    assert.deepStrictEqual(result.value, { data: [] });
+}
+```
+
+You can write it like this using the `assert` function, which narrows down the types:
+
+```ts
+assert(Result.isErr(result));
+
+assert.deepStrictEqual(result.value, { data: [] });
+```
+
+### functional/immutable-data
+
+NG:
+
+```ts
+// error  Modifying an existing object/array is not allowed  functional/immutable-data
+temp.value = 'new value';
+```
+
+OK:
+
+```ts
+mut_temp.value = 'new value';
+```
 
 ## Libraries
 
 ### ts-type-forge
 
 Types such as `DeepReadonly`, `StrictOmit`, `ReadonlyRecord` etc. are installed globally via `global.d.mts` provided by `ts-type-forge`. There is no need to explicitly import types from `ts-type-forge`.
+
+## ts-data-forge
+
+- Unit test
+    - `expect(Result.isErr(result)).toBe(true)` ではなく `assert(Result.isErr(result))` と書く
