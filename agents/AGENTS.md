@@ -56,12 +56,22 @@ If you need to update instructions, update the central repository:
 
 ## Important Instructions
 
-- コード変更後は `pnpm run fmt` を実行し、 `pnpm run tsc` と `pnpm run lint:fix` で型エラー、 lint エラーが出ないことをチェックする。エラーがあれば修正まで行う。
-    - lint エラーの修正のために file scope `/* eslint-disable */` を使ったり eslint.config.mts でルールを off にしないこと。
+- After code changes, run `pnpm run fmt`, then check for type errors with `pnpm run tsc` and lint errors with `pnpm run lint:fix`. Fix any errors found.
+    - Do not use file scope `/* eslint-disable */` or turn off rules in eslint.config.mts to fix lint errors.
     - Avoid using `// eslint-disable-next-line` as possible.
 - **RESTRICTIONS**: Do not perform these actions without explicit user instructions:
     - Push to GitHub or remote repositories
     - Access `~/.ssh` or other sensitive directories
+
+## Testing Guidelines
+
+### Framework and Setup
+
+- Framework: Vitest with globals enabled.
+- Locations: place unit tests near sources or under `test/` using `*.test.mts`.
+- Coverage: keep meaningful coverage; exclude simple re-export files.
+- Run locally: `pnpm run test` during development.
+- `vitest/globals` are enabled. Don't import `test`, `expect`, `assert`, `describe` explicitly.
 
 ### Test-Driven Development (TDD)
 
@@ -74,149 +84,6 @@ When implementing new features, follow TDD workflow:
 5. **Repeat**: Continue cycle for additional functionality
 
 **Important**: During implementation, avoid modifying tests unless requirements change
-
-## Testing Guidelines
-
-- Framework: Vitest with globals enabled.
-- Locations: place unit tests near sources or under `test/` using `*.test.mts`.
-- Coverage: keep meaningful coverage; exclude simple re-export files.
-- Run locally: `pnpm run test` during development.
-- `vitest/globals` are enabled. Don't import `test`, `expect`, `assert`, `describe` explicitly.
-
-## Coding Style & Naming Conventions
-
-### Important Patterns
-
-- **Immutability**: Functions return immutable data structures
-- **Type Safety**: Leverage `ts-type-forge` for advanced TypeScript patterns
-- **Type Guards**: Prefer type guard functions over type assertions
-- **Import Strategy**:
-    - Import `.mts` with extensions `.mjs`.
-    - Use relative paths within `src/`; avoid importing from generated `dist/` and `index.mjs` directly.
-- **Export Strategy**:
-    - All exports go through generated `index.mts` files
-    - Modules should use named exports, default exports are only allowed for configuration.
-- **Documentation**: Auto-generated from TSDoc comments using TypeDoc
-- **File Naming**:
-    - `camelCase` for variables/functions, `PascalCase` for types/classes, `kebab-case` for file names.
-    - Language: TypeScript ESM; prefer `.mts` for modules and `.d.mts` for types. Compiled output is `.mjs`.
-- **Formatting**:
-    - Follow the repository’s Prettier setup with organize-imports and package.json plugins—avoid manual formatting.
-        - Indentation: 2 spaces; LF endings. Markdown uses 4-space indents (see `.editorconfig`).
-
-#### なぜ Readonly を徹底するのか？
-
-```ts
-// ❌
-const t: [string, number] = ['a', 1];
-
-function f(x: number) {
-    if (typeof x !== 'number') throw new Error('Error!!');
-}
-
-t.reverse(); // [1, 'a']
-
-f(t[1]); // "Error!!" (but no type errors)
-```
-
-この例では `t` という mutable なタプルを reverse で反転させて `f` に渡しています。 `reverse` は破壊的メソッドであり、適用後は `t` の中身は `[1, 'a']` という値になっていますが、 `t` の型は `[string, number]` のままになってしまうという TypeScript の仕様があります[^TS-issue]。 `t[1]` は TypeScript 上は `number` 型であるにもかかわらずランタイムの値は `string` 型という不整合が生じ、 `f` を呼び出した時点でランタイムエラーになってしまいます。
-
-もしこれを以下のように readonly な型注釈をしていれば、破壊的メソッド `reverse` は readonly tuple である `t` に対して定義されていないため呼び出すことはできません。 代わりに非破壊メソッド `toReversed` を呼び出すしかありませんが、この結果は `(string | number)[]` という型に推論されるようになっているため、 「`string | number` は `number` に代入することができない」という型エラーが出てくれます。
-
-[^TS-issue]: https://github.com/microsoft/TypeScript/issues/52375
-
-```ts
-// ✅
-const t: readonly [string, number] = ['a', 1];
-
-function f(x: number) {
-    if (typeof x !== 'number') throw new Error('Error!!');
-}
-
-const r = t.toReversed(); // (string | number)[]
-
-f(r[1]);
-// Argument of type 'string | number' is not assignable to parameter of type 'number'.
-```
-
-これ以外にも、コード中の変数の大部分を immutable として扱うことができると見通しが良くなったり、 React のレンダリングにおいてオブジェクトの参照を変えずに内部を破壊的に変更してしまい描画されないなどの問題を防げたりなど、堅牢性の観点で様々なメリットがあります。
-
-### Script Organization Rules
-
-Within a file, organize functions from top to bottom in the call hierarchy in the following order:
-
-1. **main function** - entry point at the top
-2. **functions called directly from the **main** function** - call order
-3. **functions called from level 2 functions** - later in the call chain
-4. **helper functions and utilities** - lowest
-5. **type definitions** - before functions that use them
-6. **constants and settings** - near the top after imports
-
-This organization makes the script easier to read and understand the execution flow.
-
-### Syntax rules (and corresponding ESLint rules)
-
-- 型安全を最優先
-    - **NEVER** use `as any`, `as never`, or `@ts-ignore` (use `@ts-expect-error` when absolutely necessary)
-    - 関数の戻り値は明示する
-    - `any` や `never` による危険な型アサーションはなるべく避ける。
-    - Avoid any casting as possible.
-    - readonly なプロパティやパラメータを基本とする。型定義の記法については lint 設定に従う。
-    - 暗黙の型強制を避ける
-        - if や while 等の条件文の条件部や論理演算子のオペランドに boolean 以外の型の値を使用しない（`@typescript-eslint/strict-boolean-expressions` ルールでチェックされる）。
-        - number, string, boolean 以外の型の変数を template literal に埋め込むことを禁止する（`@typescript-eslint/restrict-template-expressions` ルールでチェックされる）。
-    - 配列のソート時に比較関数を必ず書く。ただし、文字列要素の配列（`string[]`）の場合のみ省略してよい（`require-array-sort-compare` ルールでチェックされる）。
-    - 部分的な `reduce` や除算といった例外を生みやすい操作は禁止
-- 演算子の使用の制限
-    - `+foo` （数値への型強制）や `"" + foo`（文字列への型強制）などを禁止（`no-implicit-coercion` ルールでチェックされる）。
-    - `"1" + 2` のような異なる型同士の加算を禁止（`@typescript-eslint/restrict-plus-operands` ルールでチェックされる）。
-    - 文字列同士の連結にも `+` を使わない（`prefer-template` ルールでチェックされる）。代わりに `${a}${b}` あるいは `[a, b].join("")`, `"".concat(a, b)` のようにする。また、例えば改行を挟む場合は `[a, b].join("\n")` のようにする。
-- 不変データ指向
-    - `let` は使用せず `const` を使う（`functional/no-let`）。
-        - どうしても使用しなければならない場合は変数名に `mut_` prefix を付ける。
-    - readonly 型を徹底。
-        - 配列は必ず `T[]` ではなく `readonly T[]` と readonly array にする。
-        - ネストが深く `Readonly<*>` を書く量が多い場合には `DeepReadonly<{ a: { b: { c: number[] }}}>` のように `DeepReadonly` 型ユーティリティを用いることも検討する。
-    - object や配列の定数は `as const` 付きで定義する。
-    - オブジェクトの直接変更を禁止し、引数や返値のミュータブル化を避ける（`functional/immutable-data` ルールでチェックされる）。
-    - クラス継承や enum といった可変/部分的構造は原則排除。
-- モダン構文の強制
-    - `var` や `new Array()`、`in` 演算子、`React.useImperativeHandle` など旧来構文は使用しない。
-    - テンプレートリテラル、オブジェクトスプレッド、`Object.hasOwn` の利用を推奨
-    - Use arrow functions in all cases
-- モジュール・依存管理
-    - 循環 import を避ける（`import-x/no-cycle`）。
-    - import は type-import を明示しつつ `.mjs`/`.json` 以外は拡張子を付けない。
-    - `./a/b` のような内部パス import はしない。 各ディレクトリに index.mts ファイルを配置し他ディレクトリで参照するものを export しておく。 `pnpm run gi` コマンドで index.mts ファイルを全ディレクトリに対して自動生成できる。
-    - default export は使用しない。
-    - ツリーシェイク可能な記述をする
-    - `node:` プレフィックスの標準モジュールを利用する
-- 非同期処理の堅牢化
-    - Promise には必ず `await` か `.catch()` を付与し、ネストや多重解決を排除（`no-floating-promises` ルールでチェックされる）。
-- React/JSX ルール
-    - コンポーネントは arrow function + `.tsx` 拡張子で定義する。
-    - props spread や inline 関数/オブジェクト化を避ける。
-    - Hooks の依存配列と呼び出し順序を厳格に管理し、React Refresh/Perf ルールで不要な再レンダリングや不正なエクスポートを防ぐ。
-    - JSX 内の条件分岐では `cond && <Something />` のように短絡評価は使わず、 `cond ? <Something /> : undefined` と三項演算子を用いて厳密に条件分岐を行う（ `react/jsx-no-leaked-render` でチェック）。
-- アクセシビリティの徹底
-    - すべてのインタラクティブ要素に役割とラベルを付与。`alt` や `aria-*` の整合性、フォーカスの移動可能性、tabindex の管理など JSX a11y ルールに準拠したマークアップを行う。
-- Module
-    - Use ES modules (import/export) syntax over CommonJS (require)
-    - Use named exports unless restricted by libraries or frameworks
-    - Destructuring imports when possible (e.g., `import { foo } from 'bar'`)
-        - Exceptions: Node utilities such as fs, path, url etc.
-- テストコード規約
-    - Vitest/Jest/Playwright/Cypress 用ルールで `test` 名や `describe` ネスト、`expect` の配置を統一。
-    - Use `assert.deepStrictEqual(A, B)` instead of `assert.deepEqual(A, B)`, `expect(A).toEqual(B)`, `expect(A).toStrictEqual(B)` in Vitest tests
-    - Use `test()` instead of `it()` in Vitest tests
-    - 同期イベントへの await や `force`/`pause` の乱用を禁じ、スクリーン API とユーザ操作シミュレーションを推奨する。
-- セキュリティと品質
-    - `eval`，`Function`，動的 `require`, `import`，危険な正規表現は使用禁止。
-    - `unicorn/*` でファイル命名、配列操作、最新 DOM/Node API の採用を強制し、`import-x/no-useless-path-segments` や `no-restricted-globals` で可読性とバグ低減を図る。
-
-### React Coding Style
-
-**TBD**
 
 ### Testing Approach
 
@@ -246,7 +113,144 @@ The `expectType` utility provides a DSL for type assertions:
 
 Use `expectType<A, B>('=')` whenever possible. Avoid using `expectType<A, B>('<=')` or `expectType<A, B>('!=')` except when intended.
 
-### How To Fix Type Errors
+### Test Code Conventions
+
+- Unify `test` names, `describe` nesting, and `expect` placement with Vitest/Jest/Playwright/Cypress rules.
+- Use `assert.deepStrictEqual(A, B)` instead of `assert.deepEqual(A, B)`, `expect(A).toEqual(B)`, `expect(A).toStrictEqual(B)` in Vitest tests (checked by `vitest-coding-style/no-expect-to-strict-equal` rule).
+- Use `test()` instead of `it()` in Vitest tests
+- Prohibit overuse of await for synchronous events and `force`/`pause`, prefer screen API and user interaction simulation.
+
+## Coding Style & Naming Conventions
+
+### Important Patterns
+
+- **Immutability**: Functions return immutable data structures
+- **Type Safety**: Leverage `ts-type-forge` for advanced TypeScript patterns
+- **Type Guards**: Prefer type guard functions over type assertions
+- **Import Strategy**:
+    - Import `.mts` with extensions `.mjs`.
+    - Use relative paths within `src/`; avoid importing from generated `dist/` and `index.mjs` directly.
+- **Export Strategy**:
+    - All exports go through generated `index.mts` files
+    - Modules should use named exports, default exports are only allowed for configuration.
+- **Documentation**: Auto-generated from TSDoc comments using TypeDoc
+- **File Naming**:
+    - `camelCase` for variables/functions, `PascalCase` for types/classes, `kebab-case` for file names.
+    - Language: TypeScript ESM; prefer `.mts` for modules and `.d.mts` for types. Compiled output is `.mjs`.
+- **Formatting**:
+    - Follow the repository’s Prettier setup with organize-imports and package.json plugins—avoid manual formatting.
+        - Indentation: 2 spaces; LF endings. Markdown uses 4-space indents (see `.editorconfig`).
+
+#### Why enforce readonly?
+
+```ts
+// ❌
+const t: [string, number] = ['a', 1];
+
+function f(x: number) {
+    if (typeof x !== 'number') throw new Error('Error!!');
+}
+
+t.reverse(); // [1, 'a']
+
+f(t[1]); // "Error!!" (but no type errors)
+```
+
+In this example, we reverse a mutable tuple `t` and pass it to `f`. `reverse` is a destructive method, and after applying it, the content of `t` becomes `[1, 'a']`, but TypeScript's type system keeps `t`'s type as `[string, number]`. This creates an inconsistency where `t[1]` is type `number` in TypeScript but `string` at runtime, causing a runtime error when calling `f`.
+
+If we annotate it as readonly as shown below, the destructive method `reverse` cannot be called on the readonly tuple `t`. Instead, we must call the non-destructive method `toReversed`, which is inferred as type `(string | number)[]`, causing a type error: "`string | number` is not assignable to parameter of type `number`".
+
+```ts
+// ✅
+const t: readonly [string, number] = ['a', 1];
+
+function f(x: number) {
+    if (typeof x !== 'number') throw new Error('Error!!');
+}
+
+const r = t.toReversed(); // (string | number)[]
+
+f(r[1]);
+// Argument of type 'string | number' is not assignable to parameter of type 'number'.
+```
+
+Beyond this, treating most variables as immutable improves code readability and prevents various issues, such as mutating objects without changing their references in React rendering (which can cause UI not to update), enhancing overall robustness.
+
+See also: [TypeScript Issue #52375](https://github.com/microsoft/TypeScript/issues/52375)
+
+### Script Organization Rules
+
+Within a file, organize functions from top to bottom in the call hierarchy in the following order:
+
+1. **main function** - entry point at the top
+2. **functions called directly from the **main** function** - call order
+3. **functions called from level 2 functions** - later in the call chain
+4. **helper functions and utilities** - lowest
+5. **type definitions** - before functions that use them
+6. **constants and settings** - near the top after imports
+
+This organization makes the script easier to read and understand the execution flow.
+
+### Syntax rules (and corresponding ESLint rules)
+
+- Type safety first
+    - **NEVER** use `as any`, `as never`, or `@ts-ignore` (use `@ts-expect-error` when absolutely necessary)
+    - Explicitly specify function return types
+    - Avoid dangerous type assertions with `any` or `never`.
+    - Avoid any casting as possible.
+    - Use readonly properties and parameters by default. Follow lint configuration for type definition notation.
+    - Avoid implicit type coercion
+        - Do not use non-boolean values in conditions of if/while statements or as operands of logical operators (checked by `@typescript-eslint/strict-boolean-expressions` rule).
+        - Do not embed variables of types other than number, string, or boolean in template literals (checked by `@typescript-eslint/restrict-template-expressions` rule).
+    - Always provide a comparison function when sorting arrays. Exception: may be omitted only for string arrays (`string[]`) (checked by `require-array-sort-compare` rule).
+    - Prohibit operations that easily produce exceptions such as partial `reduce` or division
+- Operator usage restrictions
+    - Prohibit `+foo` (coercion to number) or `"" + foo` (coercion to string) (checked by `no-implicit-coercion` rule).
+    - Prohibit addition of different types like `"1" + 2` (checked by `@typescript-eslint/restrict-plus-operands` rule).
+    - Do not use `+` for string concatenation (checked by `prefer-template` rule). Instead use `${a}${b}` or `[a, b].join("")`, `"".concat(a, b)`. For example, when adding newlines, use `[a, b].join("\n")`.
+- Immutable data orientation
+    - Use `const` instead of `let` (`functional/no-let`).
+        - If you absolutely must use it, add the `mut_` prefix to the variable name.
+    - Enforce readonly types.
+        - Always use `readonly T[]` instead of `T[]` for arrays.
+        - When nesting is deep and writing `Readonly<*>` becomes verbose, consider using `DeepReadonly` type utility like `DeepReadonly<{ a: { b: { c: number[] }}}>`.
+    - Define object and array constants with `as const`.
+    - Prohibit direct mutation of objects and avoid making arguments or return values mutable (checked by `functional/immutable-data` rule).
+    - Eliminate mutable/partial structures like class inheritance and enums in principle.
+- Enforce modern syntax
+    - Do not use legacy syntax such as `var`, `new Array()`, `in` operator, or `React.useImperativeHandle`.
+    - Prefer template literals, object spread, and `Object.hasOwn`
+    - Use arrow functions in all cases
+- Module and dependency management
+    - Use ES modules (import/export) syntax over CommonJS (require)
+    - Use named exports unless restricted by libraries or frameworks
+    - Destructuring imports when possible (e.g., `import { foo } from 'bar'`)
+        - Exceptions: Node utilities such as fs, path, url etc.
+    - Avoid circular imports (`import-x/no-cycle`).
+    - Use explicit type-imports and do not add extensions except for `.mjs`/`.json`.
+    - Do not use internal path imports like `./a/b`. Place index.mts files in each directory and export items to be referenced by other directories. Use `pnpm run gi` command to auto-generate index.mts files for all directories.
+    - Write code that is tree-shakeable
+    - Use standard modules with `node:` prefix
+- Robust async handling
+    - Always use `await` or `.catch()` with Promises, eliminating nesting and multiple resolutions (checked by `no-floating-promises` rule).
+- React/JSX rules
+    - Define components with arrow functions + `.tsx` extension.
+    - Avoid props spread and inline functions/objects.
+    - Strictly manage Hooks dependency arrays and call order, preventing unnecessary re-renders and improper exports with React Refresh/Perf rules.
+    - In JSX conditionals, do not use short-circuit evaluation like `cond && <Something />`, instead use ternary operators for strict branching: `cond ? <Something /> : undefined` (checked by `react/jsx-no-leaked-render`).
+- Accessibility enforcement
+    - Provide roles and labels for all interactive elements. Follow JSX a11y rules for consistent `alt` and `aria-*` attributes, focus management, and tabindex control.
+- Security and quality
+    - Prohibit `eval`, `Function`, dynamic `require`, `import`, and dangerous regular expressions.
+    - Enforce file naming, array operations, and modern DOM/Node API adoption with `unicorn/*`, improve readability and reduce bugs with `import-x/no-useless-path-segments` and `no-restricted-globals`.
+
+### React Coding Style
+
+<!-- TBD -->
+
+## Troubleshooting
+
+### Type Errors
 
 #### `noUncheckedIndexedAccess` Related Issues
 
@@ -314,7 +318,7 @@ const fn = (xs: readonly number[]): void => {
 };
 ```
 
-### How To Fix Lint Errors
+### Lint Errors
 
 #### functional/immutable-data / functional/no-let
 
@@ -390,4 +394,4 @@ Types such as `DeepReadonly`, `StrictOmit`, `ReadonlyRecord` etc. are installed 
 ### ts-data-forge
 
 - Unit test
-    - `expect(Result.isErr(result)).toBe(true)` ではなく `assert(Result.isErr(result))` と書く
+    - Write `assert(Result.isErr(result))` instead of `expect(Result.isErr(result)).toBe(true)`
