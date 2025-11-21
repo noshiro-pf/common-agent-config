@@ -63,6 +63,26 @@ If you need to update instructions, update the central repository:
     - Push to GitHub or remote repositories
     - Access `~/.ssh` or other sensitive directories
 
+### Test-Driven Development (TDD)
+
+When implementing new features, follow TDD workflow:
+
+1. **Write Tests First**: Create tests based on expected inputs and outputs
+2. **Verify Test Failure**: Run tests to confirm they fail as expected
+3. **Implement Code**: Write minimal code to make tests pass
+4. **Refactor**: Improve code while keeping tests green
+5. **Repeat**: Continue cycle for additional functionality
+
+**Important**: During implementation, avoid modifying tests unless requirements change
+
+## Testing Guidelines
+
+- Framework: Vitest with globals enabled.
+- Locations: place unit tests near sources or under `test/` using `*.test.mts`.
+- Coverage: keep meaningful coverage; exclude simple re-export files.
+- Run locally: `pnpm run test` during development.
+- `vitest/globals` are enabled. Don't import `test`, `expect`, `assert`, `describe` explicitly.
+
 ## Coding Style & Naming Conventions
 
 ### Important Patterns
@@ -84,17 +104,42 @@ If you need to update instructions, update the central repository:
     - Follow the repository’s Prettier setup with organize-imports and package.json plugins—avoid manual formatting.
         - Indentation: 2 spaces; LF endings. Markdown uses 4-space indents (see `.editorconfig`).
 
-### Test-Driven Development (TDD)
+#### なぜ Readonly を徹底するのか？
 
-When implementing new features, follow TDD workflow:
+```ts
+// ❌
+const t: [string, number] = ['a', 1];
 
-1. **Write Tests First**: Create tests based on expected inputs and outputs
-2. **Verify Test Failure**: Run tests to confirm they fail as expected
-3. **Implement Code**: Write minimal code to make tests pass
-4. **Refactor**: Improve code while keeping tests green
-5. **Repeat**: Continue cycle for additional functionality
+function f(x: number) {
+    if (typeof x !== 'number') throw new Error('Error!!');
+}
 
-**Important**: During implementation, avoid modifying tests unless requirements change
+t.reverse(); // [1, 'a']
+
+f(t[1]); // "Error!!" (but no type errors)
+```
+
+この例では `t` という mutable なタプルを reverse で反転させて `f` に渡しています。 `reverse` は破壊的メソッドであり、適用後は `t` の中身は `[1, 'a']` という値になっていますが、 `t` の型は `[string, number]` のままになってしまうという TypeScript の仕様があります[^TS-issue]。 `t[1]` は TypeScript 上は `number` 型であるにもかかわらずランタイムの値は `string` 型という不整合が生じ、 `f` を呼び出した時点でランタイムエラーになってしまいます。
+
+もしこれを以下のように readonly な型注釈をしていれば、破壊的メソッド `reverse` は readonly tuple である `t` に対して定義されていないため呼び出すことはできません。 代わりに非破壊メソッド `toReversed` を呼び出すしかありませんが、この結果は `(string | number)[]` という型に推論されるようになっているため、 「`string | number` は `number` に代入することができない」という型エラーが出てくれます。
+
+[^TS-issue]: https://github.com/microsoft/TypeScript/issues/52375
+
+```ts
+// ✅
+const t: readonly [string, number] = ['a', 1];
+
+function f(x: number) {
+    if (typeof x !== 'number') throw new Error('Error!!');
+}
+
+const r = t.toReversed(); // (string | number)[]
+
+f(r[1]);
+// Argument of type 'string | number' is not assignable to parameter of type 'number'.
+```
+
+これ以外にも、コード中の変数の大部分を immutable として扱うことができると見通しが良くなったり、 React のレンダリングにおいてオブジェクトの参照を変えずに内部を破壊的に変更してしまい描画されないなどの問題を防げたりなど、堅牢性の観点で様々なメリットがあります。
 
 ### Script Organization Rules
 
@@ -169,42 +214,9 @@ This organization makes the script easier to read and understand the execution f
     - `eval`，`Function`，動的 `require`, `import`，危険な正規表現は使用禁止。
     - `unicorn/*` でファイル命名、配列操作、最新 DOM/Node API の採用を強制し、`import-x/no-useless-path-segments` や `no-restricted-globals` で可読性とバグ低減を図る。
 
-#### なぜ Readonly を徹底するのか？
+### React Coding Style
 
-```ts
-// ❌
-const t: [string, number] = ['a', 1];
-
-function f(x: number) {
-    if (typeof x !== 'number') throw new Error('Error!!');
-}
-
-t.reverse(); // [1, 'a']
-
-f(t[1]); // "Error!!" (but no type errors)
-```
-
-この例では `t` という mutable なタプルを reverse で反転させて `f` に渡しています。 `reverse` は破壊的メソッドであり、適用後は `t` の中身は `[1, 'a']` という値になっていますが、 `t` の型は `[string, number]` のままになってしまうという TypeScript の仕様があります[^TS-issue]。 `t[1]` は TypeScript 上は `number` 型であるにもかかわらずランタイムの値は `string` 型という不整合が生じ、 `f` を呼び出した時点でランタイムエラーになってしまいます。
-
-もしこれを以下のように readonly な型注釈をしていれば、破壊的メソッド `reverse` は readonly tuple である `t` に対して定義されていないため呼び出すことはできません。 代わりに非破壊メソッド `toReversed` を呼び出すしかありませんが、この結果は `(string | number)[]` という型に推論されるようになっているため、 「`string | number` は `number` に代入することができない」という型エラーが出てくれます。
-
-[^TS-issue]: https://github.com/microsoft/TypeScript/issues/52375
-
-```ts
-// ✅
-const t: readonly [string, number] = ['a', 1];
-
-function f(x: number) {
-    if (typeof x !== 'number') throw new Error('Error!!');
-}
-
-const r = t.toReversed(); // (string | number)[]
-
-f(r[1]);
-// Argument of type 'string | number' is not assignable to parameter of type 'number'.
-```
-
-これ以外にも、コード中の変数の大部分を immutable として扱うことができると見通しが良くなったり、 React のレンダリングにおいてオブジェクトの参照を変えずに内部を破壊的に変更してしまい描画されないなどの問題を防げたりなど、堅牢性の観点で様々なメリットがあります。
+**TBD**
 
 ### Testing Approach
 
@@ -234,16 +246,9 @@ The `expectType` utility provides a DSL for type assertions:
 
 Use `expectType<A, B>('=')` whenever possible. Avoid using `expectType<A, B>('<=')` or `expectType<A, B>('!=')` except when intended.
 
-## Testing Guidelines
+### How To Fix Type Errors
 
-- Framework: Vitest with globals enabled.
-- Locations: place unit tests near sources or under `test/` using `*.test.mts`.
-- Coverage: keep meaningful coverage; exclude simple re-export files.
-- Run locally: `pnpm run test` during development.
-
-## How To Fix Type Errors
-
-### `noUncheckedIndexedAccess` Related Issues
+#### `noUncheckedIndexedAccess` Related Issues
 
 This project uses TypeScript with the strict setting noUncheckedIndexedAccess: true , so the following code will result in a type error:
 
@@ -280,7 +285,7 @@ const isNonEmpty = <E>(array: readonly E[]): array is NonEmptyArray<E> =>
     array.length > 0;
 ```
 
-#### Early Return
+##### Early Return
 
 ```ts
 // ❌
@@ -309,9 +314,9 @@ const fn = (xs: readonly number[]): void => {
 };
 ```
 
-## How To Fix Lint Errors
+### How To Fix Lint Errors
 
-### functional/immutable-data / functional/no-let
+#### functional/immutable-data / functional/no-let
 
 This disables mutation and encourages functional programming, but if you absolutely need to use mutable variables, you can avoid errors by adding the `mut_` prefix to the variable name.
 
@@ -342,7 +347,7 @@ const mut_xs: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 mut_xs[0] = 100;
 ```
 
-### vitest/no-conditional-expect
+#### vitest/no-conditional-expect
 
 ```ts
 expect(Result.isErr(result)).toBe(true);
@@ -361,7 +366,7 @@ assert(Result.isErr(result));
 assert.deepStrictEqual(result.value, { data: [] });
 ```
 
-### functional/immutable-data
+#### functional/immutable-data
 
 NG:
 
@@ -376,13 +381,13 @@ OK:
 mut_temp.value = 'new value';
 ```
 
-## Libraries
+## About Libraries
 
 ### ts-type-forge
 
 Types such as `DeepReadonly`, `StrictOmit`, `ReadonlyRecord` etc. are installed globally via `global.d.mts` provided by `ts-type-forge`. There is no need to explicitly import types from `ts-type-forge`.
 
-## ts-data-forge
+### ts-data-forge
 
 - Unit test
     - `expect(Result.isErr(result)).toBe(true)` ではなく `assert(Result.isErr(result))` と書く
