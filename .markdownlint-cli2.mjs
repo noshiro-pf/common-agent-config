@@ -3,7 +3,7 @@ const config = {
     '**/*.md',
     '!node_modules',
     '!CHANGELOG.md',
-    '!./BREAKING_CHANGE_GUIDE.md',
+    '!agents/BREAKING_CHANGE_GUIDE.md',
   ],
   prettier: true,
   fix: true,
