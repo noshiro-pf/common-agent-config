@@ -56,7 +56,7 @@ If you need to update instructions, update the central repository:
 
 ## Important Instructions
 
-- After code changes, run `pnpm run fmt`, then check for type errors with `pnpm run tsc` and lint errors with `pnpm run lint:fix`. Fix any errors found.
+- After code changes, run `pnpm run fmt`, then check for type errors with `pnpm run tsc` and lint errors with `pnpm run lint:fix` if you changed TypeScript/JavaScript code. Fix any errors found.
     - Do not use file scope `/* eslint-disable */` or turn off rules in eslint.config.mts to fix lint errors.
     - Avoid using `// eslint-disable-next-line` as possible.
 - **RESTRICTIONS**: Do not perform these actions without explicit user instructions:
