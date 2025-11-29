@@ -28,7 +28,7 @@
     "prettier-plugin-packagejson": "^2.5.19",
     "ts-repo-utils": "^7.8.2"
   },
-  "packageManager": "pnpm@10.20.0",
+  "packageManager": "pnpm@10.24.0",
   "volta": {
     "node": "25.0.0"
   }
