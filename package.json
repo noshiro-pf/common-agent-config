@@ -6,6 +6,7 @@
   "license": "ISC",
   "author": "noshiro-pf",
   "scripts": {
+    "cspell": "cspell \"**\" --gitignore --gitignore-root ./ --no-progress",
     "fmt": "format-uncommitted",
     "fmt:diff": "format-diff-from origin/main",
     "fmt:full": "prettier --write .",
@@ -21,15 +22,15 @@
   "devDependencies": {
     "cspell": "9.4.0",
     "github-settings-as-code": "1.0.6",
-    "markdownlint": "0.39.0",
-    "markdownlint-cli2": "0.19.1",
-    "prettier": "3.7.3",
+    "markdownlint": "0.40.0",
+    "markdownlint-cli2": "0.20.0",
+    "prettier": "3.7.4",
     "prettier-plugin-organize-imports": "4.3.0",
     "prettier-plugin-packagejson": "2.5.20",
-    "ts-repo-utils": "7.9.4"
+    "ts-repo-utils": "7.9.5"
   },
   "packageManager": "pnpm@10.24.0",
   "volta": {
-    "node": "25.0.0"
+    "node": "25.2.1"
   }
 }
