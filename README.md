@@ -11,3 +11,5 @@ then
 ```sh
 ln -s agents/common/agents/AGENTS.md AGENTS.md
 ```
+
+Ignore `./agents` in `.prettierignore`, `.cspell.json`, `.markdownlint-cli2.mjs`, `eslint.config.mts` etc.
