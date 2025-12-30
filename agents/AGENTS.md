@@ -347,7 +347,6 @@ mut_temp = 2;
 
 const mut_xs: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-// eslint-disable-next-line functional/immutable-data
 mut_xs[0] = 100;
 ```
 
