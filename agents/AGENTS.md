@@ -195,7 +195,8 @@ This organization makes the script easier to read and understand the execution f
 
 - Type safety first
     - **NEVER** use `as any`, `as never`, or `@ts-ignore` (use `@ts-expect-error` when absolutely necessary)
-    - Explicitly specify function return types
+    - Explicitly specify function return types (checked by `@typescript-eslint/explicit-function-return-type` rule)
+        - Explicit return types do make it visually more clear what type is returned by a function. They can also speed up TypeScript type checking performance in large codebases with many large functions.
     - Avoid dangerous type assertions with `any` or `never`.
     - Avoid any casting as possible.
     - Use readonly properties and parameters by default. Follow lint configuration for type definition notation.
