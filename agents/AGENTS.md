@@ -39,7 +39,7 @@ If you need to update instructions, update the central repository:
 **Document generation:**
 
 - `pnpm run doc` — Generate Markdown docs into `docs/`.
-- `pnpm run doc:embed` — Embeds the sample code in `samples/` into the Markdown document (e.g. `README.md`) specified in `scripts/cmd/embed-samples.mts`.
+- `pnpm run doc:embed` — Embeds the sample code in `samples/` into the Markdown document (e.g. `README.md`) specified in `scripts/cmd/embed-examples.mts`.
 
 ## Project Structure & Module Organization
 
