@@ -30,6 +30,10 @@
     "ts-repo-utils": "8.0.2"
   },
   "packageManager": "pnpm@10.24.0",
+  "engines": {
+    "node": ">=20.11.0",
+    "pnpm": ">=8.0.0"
+  },
   "volta": {
     "node": "25.2.1"
   }
