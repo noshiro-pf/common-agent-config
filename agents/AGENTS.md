@@ -41,7 +41,6 @@ If you need to update these instructions, please update the central repository:
 - `pnpm run doc` — Generate Markdown documentation into `docs/`.
 - `pnpm run doc:embed` — Embed sample code from `samples/` into the Markdown document (e.g. `README.md`) specified in `scripts/cmd/embed-examples.mts`.
 
-
 ## Project Structure & Module Organization
 
 - Source: `src`
@@ -55,7 +54,6 @@ If you need to update these instructions, please update the central repository:
 - Sample code: `samples/`.
 - GitHub repository settings: `github/`
 
-
 ## Important Instructions
 
 - After making code changes, run `pnpm run fmt`, then check for type errors with `pnpm run tsc` and lint errors with `pnpm run lint:fix` if you changed TypeScript/JavaScript code. Fix any errors found.
@@ -64,7 +62,6 @@ If you need to update these instructions, please update the central repository:
 - **RESTRICTIONS**: Do not perform these actions without explicit user instructions:
     - Push to GitHub or remote repositories
     - Access `~/.ssh` or other sensitive directories
-
 
 ## Testing Guidelines
 
@@ -330,7 +327,7 @@ To avoid division by zero errors, always use `Num.div` from `ts-data-forge` and 
 
 ```ts
 // ❌ Don't do this:
-const result = a / b;  // Error: Division is partial
+const result = a / b; // Error: Division is partial
 
 // ❌ Don't create your own utility like this:
 const safeDivide = (a: number, b: number): number =>
