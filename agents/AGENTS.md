@@ -321,6 +321,31 @@ const fn = (xs: readonly number[]): void => {
 
 ### Lint Errors
 
+#### total-functions/no-partial-division
+
+To avoid division by zero errors, use `Num.div` from `ts-data-forge` with explicit zero checks:
+
+```ts
+// ❌
+const result = a / b;  // Error: Division is partial
+
+// ❌ Do not create custom utility
+const safeDivide = (a: number, b: number): number =>
+  // eslint-disable-next-line total-functions/no-partial-division
+  b === 0 ? 0 : a / b;
+
+// ✅
+import { Num } from 'ts-data-forge';
+
+const calculateValue = (a: number, b: number): number => {
+  if (!Num.isNonZero(b)) return 0;
+  
+  return Num.div(a, b);
+};
+```
+
+Note: `Num.div` requires the denominator to be `NonZeroNumber | 1 | 2 | ... | 39 | -1 | -2 | ... | -40` type for compile-time safety, so you must guard against zero explicitly before calling it.
+
 #### functional/immutable-data / functional/no-let
 
 This disables mutation and encourages functional programming, but if you absolutely need to use mutable variables, you can avoid errors by adding the `mut_` prefix to the variable name.
