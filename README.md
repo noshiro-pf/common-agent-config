@@ -12,4 +12,4 @@ then
 ln -s agents/common/agents/AGENTS.md AGENTS.md
 ```
 
-Ignore `./agents` in `.prettierignore`, `.cspell.json`, `.markdownlint-cli2.mjs`, `eslint.config.mts` etc.
+Ignore `./agents` in `.prettierignore`, `.cspell.config.yaml`, `.markdownlint-cli2.mjs`, `eslint.config.mts` etc.
