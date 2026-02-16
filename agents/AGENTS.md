@@ -426,3 +426,7 @@ Types such as `DeepReadonly`, `StrictOmit`, `ReadonlyRecord` etc. are installed 
 - Use `fastDeepEqual` for deep equality comparison
 - Unit test
     - Write `assert.isTrue(Result.isErr(result))` instead of `expect(Result.isErr(result)).toBe(true)`
+
+### immer
+
+- When assigning readonly values to immer's draft causes type errors, use `castDraft` to resolve them
