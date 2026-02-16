@@ -247,7 +247,7 @@ This organization makes the script easier to read and understand the execution f
 
 ### React Coding Style
 
-<!-- TBD -->
+TBD
 
 ## Troubleshooting
 
@@ -391,7 +391,7 @@ if (Result.isErr(result)) {
 You can write it like this using the `assert` function, which narrows down the types:
 
 ```ts
-assert(Result.isErr(result));
+assert.isTrue(Result.isErr(result));
 
 assert.deepStrictEqual(result.value, { data: [] });
 ```
@@ -419,5 +419,10 @@ Types such as `DeepReadonly`, `StrictOmit`, `ReadonlyRecord` etc. are installed 
 
 ### ts-data-forge
 
+- Use `Arr.isArray` instead of `Array.isArray` (enforced by `ts-data-forge/prefer-arr-is-array` rule from <https://github.com/noshiro-pf/eslint-config-typed.git>)
+- Use `isRecord` and `hasKey` for type narrowing instead of `Object.hasOwn` or `in` operator (enforced by `ts-data-forge/prefer-is-record-and-has-key` rule)
+- Arguments for functions like `Arr.seq` must be of type `Int` (cast using `asUint32` utility)
+- Use `memoizeFunction` for function memoization
+- Use `fastDeepEqual` for deep equality comparison
 - Unit test
-    - Write `assert(Result.isErr(result))` instead of `expect(Result.isErr(result)).toBe(true)`
+    - Write `assert.isTrue(Result.isErr(result))` instead of `expect(Result.isErr(result)).toBe(true)`
