@@ -6,11 +6,29 @@ If you need to update these instructions, please update the central repository:
 
 ## Commit & Pull Request Guidelines
 
+### Commit Messages
+
 - Use Conventional Commits to enable semantic-release, for example:
     - `feat: add parser for .mts`
     - `fix: handle Windows path resolution`
     - `chore(deps): bump rollup to 4.50.1`
-- For pull requests: include a clear description, link related issues, and add screenshots or logs when helpful. Note any breaking changes using “BREAKING CHANGE: …”. Make sure CI passes and `pnpm run check-all` completes without errors.
+
+| prefix   | description                                                                                |
+| :------- | :----------------------------------------------------------------------------------------- |
+| feat     | A new feature                                                                              |
+| fix      | A bug fix                                                                                  |
+| docs     | Documentation-only changes                                                                 |
+| style    | Changes that do not affect code behavior (whitespace, formatting, missing semicolons, etc.) |
+| refactor | A code change that neither fixes a bug nor adds a feature                                  |
+| perf     | A code change that improves performance                                                    |
+| test     | Adding missing tests or correcting existing tests                                          |
+| chore    | Changes to build process, auxiliary tools, or libraries (e.g., documentation generation)   |
+
+### Pull Requests
+
+- Include a clear description, link related issues, and add screenshots or logs when helpful.
+- Note any breaking changes using `BREAKING CHANGE: ...`.
+- Make sure CI passes and `pnpm run check-all` completes without errors.
 
 ## Essential Development Commands
 
