@@ -13,16 +13,16 @@ If you need to update these instructions, please update the central repository:
     - `fix: handle Windows path resolution`
     - `chore(deps): bump rollup to 4.50.1`
 
-| prefix   | description                                                                                |
-| :------- | :----------------------------------------------------------------------------------------- |
-| feat     | A new feature                                                                              |
-| fix      | A bug fix                                                                                  |
-| docs     | Documentation-only changes                                                                 |
+| prefix   | description                                                                                 |
+| :------- | :------------------------------------------------------------------------------------------ |
+| feat     | A new feature                                                                               |
+| fix      | A bug fix                                                                                   |
+| docs     | Documentation-only changes                                                                  |
 | style    | Changes that do not affect code behavior (whitespace, formatting, missing semicolons, etc.) |
-| refactor | A code change that neither fixes a bug nor adds a feature                                  |
-| perf     | A code change that improves performance                                                    |
-| test     | Adding missing tests or correcting existing tests                                          |
-| chore    | Changes to build process, auxiliary tools, or libraries (e.g., documentation generation)   |
+| refactor | A code change that neither fixes a bug nor adds a feature                                   |
+| perf     | A code change that improves performance                                                     |
+| test     | Adding missing tests or correcting existing tests                                           |
+| chore    | Changes to build process, auxiliary tools, or libraries (e.g., documentation generation)    |
 
 ### Pull Requests
 
