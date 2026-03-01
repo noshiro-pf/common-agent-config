@@ -12,8 +12,8 @@ importers:
         specifier: 9.6.4
         version: 9.6.4
       github-settings-as-code:
-        specifier: 1.1.4
-        version: 1.1.4(typescript@5.9.3)
+        specifier: 1.1.6
+        version: 1.1.6(typescript@5.9.3)
       markdownlint:
         specifier: 0.40.0
         version: 0.40.0
@@ -710,8 +710,8 @@ packages:
   git-hooks-list@4.2.1:
     resolution: {integrity: sha512-WNvqJjOxxs/8ZP9+DWdwWJ7cDsd60NHf39XnD82pDVrKO5q7xfPqpkK6hwEAmBa/ZSEE4IOoR75EzbbIuwGlMw==}
 
-  github-settings-as-code@1.1.4:
-    resolution: {integrity: sha512-I4t/GXHwOuKzV8IzAJKd/47HzIY8s7kru1I85xF7daldunG9KXfzDwEqVIYnW53n09/2X2Ifjbsd4ulhoWW72A==}
+  github-settings-as-code@1.1.6:
+    resolution: {integrity: sha512-TX5EnNPVMZKn26oUmgndl0SQ7LYrduFB383XSnuY3fvdAuw2oa7TrFc5C+R6eIBni3UC6gdCdPSGGzb3gj6DdQ==}
     engines: {node: '>=20.11.0', pnpm: '>=8.0.0'}
     hasBin: true
 
@@ -782,8 +782,8 @@ packages:
     resolution: {integrity: sha512-qQKT4zQxXl8lLwBtHMWwaTcGfFOZviOJet3Oy/xmGk2gZH677CJM9EvtfdSkgWcATZhj/55JZ0rmy3myCT5lsA==}
     hasBin: true
 
-  json-with-bigint@3.5.3:
-    resolution: {integrity: sha512-QObKu6nxy7NsxqR0VK4rkXnsNr5L9ElJaGEg+ucJ6J7/suoKZ0n+p76cu9aCqowytxEbwYNzvrMerfMkXneF5A==}
+  json-with-bigint@3.5.7:
+    resolution: {integrity: sha512-7ei3MdAI5+fJPVnKlW77TKNKwQ5ppSzWvhPuSuINT/GYW9ZOC1eRKOuhV9yHG5aEsUPj9BBx5JIekkmoLHxZOw==}
 
   jsonc-parser@3.3.1:
     resolution: {integrity: sha512-HUgH65KyejrUFPvHFPbqOY0rsFip3Bo5wb4ngvdi1EpCYWUQDC5V+Y7mZws+DLkr4M//zQJoanu1SP+87Dv1oQ==}
@@ -1427,7 +1427,7 @@ snapshots:
       '@octokit/request-error': 7.1.0
       '@octokit/types': 16.0.0
       fast-content-type-parse: 3.0.0
-      json-with-bigint: 3.5.3
+      json-with-bigint: 3.5.7
       universal-user-agent: 7.0.3
 
   '@octokit/types@16.0.0':
@@ -1697,7 +1697,7 @@ snapshots:
 
   git-hooks-list@4.2.1: {}
 
-  github-settings-as-code@1.1.4(typescript@5.9.3):
+  github-settings-as-code@1.1.6(typescript@5.9.3):
     dependencies:
       '@octokit/core': 7.0.6
       dotenv: 17.3.1
@@ -1764,7 +1764,7 @@ snapshots:
     dependencies:
       argparse: 2.0.1
 
-  json-with-bigint@3.5.3: {}
+  json-with-bigint@3.5.7: {}
 
   jsonc-parser@3.3.1: {}
 
