@@ -12,8 +12,8 @@ importers:
         specifier: 9.6.4
         version: 9.6.4
       github-settings-as-code:
-        specifier: 1.1.6
-        version: 1.1.6(typescript@5.9.3)
+        specifier: 1.1.9
+        version: 1.1.9(typescript@5.9.3)
       markdownlint:
         specifier: 0.40.0
         version: 0.40.0
@@ -710,8 +710,8 @@ packages:
   git-hooks-list@4.2.1:
     resolution: {integrity: sha512-WNvqJjOxxs/8ZP9+DWdwWJ7cDsd60NHf39XnD82pDVrKO5q7xfPqpkK6hwEAmBa/ZSEE4IOoR75EzbbIuwGlMw==}
 
-  github-settings-as-code@1.1.6:
-    resolution: {integrity: sha512-TX5EnNPVMZKn26oUmgndl0SQ7LYrduFB383XSnuY3fvdAuw2oa7TrFc5C+R6eIBni3UC6gdCdPSGGzb3gj6DdQ==}
+  github-settings-as-code@1.1.9:
+    resolution: {integrity: sha512-e7jLPUc39dg/LBnvPEnhzx7TPZDM4sSjZkxsb1/54QUcaUY5sHmamHOOWmaPMrJMM+mPV7kqW/1g6WvslrdrJg==}
     engines: {node: '>=20.11.0', pnpm: '>=8.0.0'}
     hasBin: true
 
@@ -1020,8 +1020,8 @@ packages:
     peerDependencies:
       typescript: '>=4.8'
 
-  ts-fortress@6.4.0:
-    resolution: {integrity: sha512-GbV2LEkzjmzCDd7mSu9oQXIZdG3lBXU4q8y1qztf09nwoUEP6FgF12C1UYxqoCj8KriRqtwgIMCWie7uV/E+Hg==}
+  ts-fortress@6.4.1:
+    resolution: {integrity: sha512-d6BalDR+4jbZaFpLmjxZHAIljNy1EJ06hYzAhGwpPCX8ywSDnDqjdGd//48LsJdP1Xna9DrPyV8pFt7InZEyZw==}
     engines: {node: '>=20.11.0', pnpm: '>=8.0.0'}
 
   ts-repo-utils@9.0.0:
@@ -1701,13 +1701,13 @@ snapshots:
 
   git-hooks-list@4.2.1: {}
 
-  github-settings-as-code@1.1.6(typescript@5.9.3):
+  github-settings-as-code@1.1.9(typescript@5.9.3):
     dependencies:
       '@octokit/core': 7.0.6
       dotenv: 17.3.1
       octokit-safe-types: 1.2.10(typescript@5.9.3)
       ts-data-forge: 6.5.0(typescript@5.9.3)
-      ts-fortress: 6.4.0(typescript@5.9.3)
+      ts-fortress: 6.4.1(typescript@5.9.3)
     transitivePeerDependencies:
       - typescript
 
@@ -2007,7 +2007,7 @@ snapshots:
       '@octokit/openapi-types': 27.0.0
       '@octokit/types': 16.0.0
       ts-data-forge: 6.5.0(typescript@5.9.3)
-      ts-fortress: 6.4.0(typescript@5.9.3)
+      ts-fortress: 6.4.1(typescript@5.9.3)
     transitivePeerDependencies:
       - typescript
 
@@ -2108,7 +2108,7 @@ snapshots:
       ts-type-forge: 2.3.1
       typescript: 5.9.3
 
-  ts-fortress@6.4.0(typescript@5.9.3):
+  ts-fortress@6.4.1(typescript@5.9.3):
     dependencies:
       '@sindresorhus/is': 7.2.0
       ts-data-forge: 6.5.0(typescript@5.9.3)
