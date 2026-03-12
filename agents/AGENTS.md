@@ -209,6 +209,29 @@ Within a file, organize functions from top to bottom in the call hierarchy in th
 
 This organization makes the script easier to read and understand the execution flow.
 
+### TypeScript/React File Organization
+
+When implementing functions or React components in TypeScript:
+
+- Place exported functions/components immediately after import statements at the top of the file
+- Organize code in a top-down manner so that the reading direction (top to bottom) matches the direction of tracing definitions
+- This allows readers to understand the main logic first, then follow implementation details naturally as they read downward
+
+#### React Component File Structure
+
+For React component files, follow this specific order:
+
+1. **Import statements**
+2. **Type Props definition** (e.g., `type Props = { ... }`)
+3. **Exported React component**
+4. **displayName assignment** (if the component is memoized)
+5. **Other definitions** (styles, helper functions, constants, etc.)
+
+Additionally:
+
+- **One component per file** as a general principle
+- Each component file should focus on a single component to maintain clarity and modularity
+
 ### Syntax rules (and corresponding ESLint rules)
 
 - Type safety first
