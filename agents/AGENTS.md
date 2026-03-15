@@ -198,14 +198,14 @@ See also: [TypeScript Issue #52375](https://github.com/microsoft/TypeScript/issu
 
 ### Script Organization Rules
 
-Within a file, organize functions from top to bottom in the call hierarchy in the following order:
+Within a file, organize code in the following order:
 
 1. **main function** - entry point at the top
-2. **functions called directly from the **main** function** - call order
-3. **functions called from level 2 functions** - later in the call chain
-4. **helper functions and utilities** - lowest
-5. **type definitions** - before functions that use them
-6. **constants and settings** - near the top after imports
+2. **exported functions and definitions** - public API surface
+3. **type definitions** - types used by the above functions
+4. **constants and settings** - configuration values
+5. **helper functions** - organized by call hierarchy level (ascending order: lower-level helpers before higher-level ones)
+6. **utility functions** - lowest-level utilities
 
 This organization makes the script easier to read and understand the execution flow.
 
