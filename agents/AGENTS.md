@@ -249,7 +249,10 @@ Additionally:
 - Operator usage restrictions
     - Prohibit `+foo` (coercion to number) or `"" + foo` (coercion to string) (checked by `no-implicit-coercion` rule).
     - Prohibit addition of different types like `"1" + 2` (checked by `@typescript-eslint/restrict-plus-operands` rule).
-    - Do not use `+` for string concatenation (checked by `prefer-template` rule). Instead use `${a}${b}` or `[a, b].join("")`, `"".concat(a, b)`. For example, when adding newlines, use `[a, b].join("\n")`.
+    - Do not use `+` for string concatenation (checked by `prefer-template` rule). Instead, follow these patterns:
+        - For a few strings: use template literals (e.g., `${a}_${b}`)
+        - For many strings or dynamic lists: use array `.join()` or `.concat()` (e.g., `["aaa", "bbb", "ccc", ..., "zzz"].join("\n")`)
+        - For source code generation: consider using `dedent` for cleaner formatting
 - Immutable data orientation
     - Use `const` instead of `let` (`functional/no-let`).
         - If you absolutely must use it, add the `mut_` prefix to the variable name.
