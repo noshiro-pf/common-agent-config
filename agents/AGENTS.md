@@ -283,6 +283,7 @@ Additionally:
     - Avoid props spread and inline functions/objects.
     - Strictly manage Hooks dependency arrays and call order, preventing unnecessary re-renders and improper exports with React Refresh/Perf rules.
     - In JSX conditionals, do not use short-circuit evaluation like `cond && <Something />`, instead use ternary operators for strict branching: `cond ? <Something /> : undefined` (checked by `react/jsx-no-leaked-render`).
+    - Do not concatenate strings by placing multiple expressions adjacently in JSX (e.g., `<div>{x}{y}</div>`). Instead, use template literals: `<div>{`${x}${y}`}</div>`.
 - Accessibility enforcement
     - Provide roles and labels for all interactive elements. Follow JSX a11y rules for consistent `alt` and `aria-*` attributes, focus management, and tabindex control.
 - Security and quality
