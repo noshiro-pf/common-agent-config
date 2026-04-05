@@ -710,6 +710,7 @@ packages:
   github-settings-as-code@1.2.1:
     resolution: {integrity: sha512-pJHW1Vgt8hfBkBjxeAo5DajWC2SueUWXs14cKB8oIFHK5JB2hRmoQE9awdAWgLZfecRCQIwDYJ0qPJcz6Q9rmQ==}
     engines: {node: '>=20.11.0', pnpm: '>=8.0.0'}
+    deprecated: There is a bug in ts-data-forge that prevents mergeRecords from working correctly. Please use v1.2.2.
     hasBin: true
 
   glob-parent@5.1.2:
@@ -1020,6 +1021,7 @@ packages:
   ts-fortress@6.4.2:
     resolution: {integrity: sha512-fIv5m9gZJkdCPFRvepDkp3v3+AFe19epGPqVsh1tm++6p4nC0dVU4lVim98xkKxFFKnEHFxpcKtFB4/eWoNWzw==}
     engines: {node: '>=20.11.0', pnpm: '>=8.0.0'}
+    deprecated: There is a bug in ts-data-forge that prevents mergeRecords from working correctly. Please use v7.
 
   ts-repo-utils@9.0.0:
     resolution: {integrity: sha512-uCmhkR5S1ntLmwXXYk3Mf/YYxdEKNOkMXqE5XuBFIkwnYNQz0jyyUnw8Xwrre6KFySx0+ntvd0M6YihJZNFsWQ==}
