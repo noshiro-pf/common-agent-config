@@ -12,8 +12,8 @@ importers:
         specifier: 10.0.0
         version: 10.0.0
       github-settings-as-code:
-        specifier: 1.2.3
-        version: 1.2.3(typescript@5.9.3)
+        specifier: 1.2.7
+        version: 1.2.7(typescript@5.9.3)
       markdownlint:
         specifier: 0.40.0
         version: 0.40.0
@@ -30,8 +30,8 @@ importers:
         specifier: 3.0.2
         version: 3.0.2(prettier@3.8.3)
       ts-repo-utils:
-        specifier: 9.0.1
-        version: 9.0.1(prettier@3.8.3)(typescript@5.9.3)
+        specifier: 10.0.0
+        version: 10.0.0(prettier@3.8.3)(typescript@5.9.3)
 
 packages:
 
@@ -479,9 +479,9 @@ packages:
   '@octokit/types@16.0.0':
     resolution: {integrity: sha512-sKq+9r1Mm4efXW1FCk7hFSeJo4QKreL/tTbR0rz/qx/r1Oa2VV83LTA/H/MuCOX7uCIJmQVRKBcbmWoySjAnSg==}
 
-  '@sindresorhus/is@7.2.0':
-    resolution: {integrity: sha512-P1Cz1dWaFfR4IR+U13mqqiGsLFf1KbayybWwdd2vfctdV6hDpUkgCY0nKOLLTMSoRd/jJNjtbqzf13K8DCCXQw==}
-    engines: {node: '>=18'}
+  '@sindresorhus/is@8.0.0':
+    resolution: {integrity: sha512-YvOsokBE5NsyHuXMnwEVB7lgFk6lX8F4OXCruYVgFII0hUHof0RGUvhMoabVt9hRqbg+qVzayzEG24RCcxcYeA==}
+    engines: {node: '>=22'}
 
   '@sindresorhus/merge-streams@4.0.0':
     resolution: {integrity: sha512-tlqY9xq5ukxTUZBmoOp+m61cqwQD5pHJtFY3Mn8CA8ps6yghLH/Hw8UPdqg4OLmFW3IFlcXnQNmo/dh8HzXYIQ==}
@@ -699,9 +699,9 @@ packages:
   git-hooks-list@4.2.1:
     resolution: {integrity: sha512-WNvqJjOxxs/8ZP9+DWdwWJ7cDsd60NHf39XnD82pDVrKO5q7xfPqpkK6hwEAmBa/ZSEE4IOoR75EzbbIuwGlMw==}
 
-  github-settings-as-code@1.2.3:
-    resolution: {integrity: sha512-GC4YeZPTXYUPGnLVcIre6CcO+2srfVjGewWD7Cu6XFVCseGnwF1SgWnkcQmkAkDfrS+DcqyM+atmV/iGj5LBGw==}
-    engines: {node: '>=20.11.0', pnpm: '>=8.0.0'}
+  github-settings-as-code@1.2.7:
+    resolution: {integrity: sha512-5LGEsg1CjHg6iTuqNEna7U8SxOTunU1D3Hnwk5GF3Wr6/AHrseasD9RtBe2ZR83mLxv8VfhtdffD/LY018bqXA==}
+    engines: {node: '>=22.18.0', pnpm: '>=9.0.0'}
     hasBin: true
 
   glob-parent@5.1.2:
@@ -895,9 +895,9 @@ packages:
   ms@2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
 
-  octokit-safe-types@1.2.14:
-    resolution: {integrity: sha512-dQ95BM5oR9vR9h+8TzSZUfGih8u+kF/eP6OarmXwDpPuZYE1QtmxVOk4C6Yc5iU/mpYeMz7hgUMMDVEZb7OZdg==}
-    engines: {node: '>=20.11.0', pnpm: '>=8.0.0'}
+  octokit-safe-types@1.2.16:
+    resolution: {integrity: sha512-dZGtbIZkJKbjd09R5hkVnxikfVPPUNkTwoPOU5ziLMctKEU6+G+R5bo0u3pJ62SbmXczvpL3WuFOjULUav8k0A==}
+    engines: {node: '>=22.18.0', pnpm: '>=9.0.0'}
 
   parse-entities@4.0.2:
     resolution: {integrity: sha512-GG2AQYWoLgL877gQIKeRPGO1xF9+eG1ujIb5soS5gPvLQ1y2o8FL90w2QWNdf9I361Mpp7726c+lj3U0qK1uGw==}
@@ -991,26 +991,26 @@ packages:
     resolution: {integrity: sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==}
     engines: {node: '>=8.0'}
 
-  ts-data-forge@6.9.0:
-    resolution: {integrity: sha512-/J13CeSsWetXroAGsesvQRJxjS11NEe3Qje4bxCb7MTzVMYZfrN4GeQe6jvz/PpD+XmZasG393i6virl4B4cCw==}
-    engines: {node: '>=20.11.0', pnpm: '>=8.0.0'}
+  ts-data-forge@6.9.2:
+    resolution: {integrity: sha512-mA26aJYgGUoCcjn079d2ZJO7FO8HhSEE0dDbJcv/Xz3vtBoF2WGOGpWzahNO4k6FnmwUAVBRvniCIiqt6cdf/A==}
+    engines: {node: '>=22.12.0', pnpm: '>=9.0.0'}
     peerDependencies:
       typescript: '>=4.8'
 
-  ts-fortress@7.0.2:
-    resolution: {integrity: sha512-0Vqa3NdBOXIfphzjV1RFHAy76UUuwbknQottir8WaiCkqmUKwEhvCuR3iQ3KuFE8TEaGwBcf/sASyauHOsYhNw==}
-    engines: {node: '>=20.11.0', pnpm: '>=8.0.0'}
+  ts-fortress@7.0.3:
+    resolution: {integrity: sha512-wJ4OIPzXOnFsbCxY5Hl0Sr0XexMBbS1ucxGuIRMxcimdOzKSNbR2fJElSrwiW3QZc68RAKs5mkVjpJelzoaU3A==}
+    engines: {node: '>=22.12.0', pnpm: '>=9.0.0'}
 
-  ts-repo-utils@9.0.1:
-    resolution: {integrity: sha512-xD/MZ9GQr4pFxRqaV4N22KdJ1r9Lf0zxSZAAwuwSNRVMK+N1U93NfQmfzrJWqNjIxwhioi0oEXbazfHtyJMMVg==}
-    engines: {node: '>=20.11.0', pnpm: '>=8.0.0'}
+  ts-repo-utils@10.0.0:
+    resolution: {integrity: sha512-DtyaywPZ1Rvk/A6D2GwJDxsv2Vraxgr0uB4P7B1WCzvQfNltfjXClEFar31Z88VWv7r2i/XPXpD4cb1cCWC7Zw==}
+    engines: {node: '>=22.0.0', pnpm: '>=8.0.0'}
     hasBin: true
     peerDependencies:
       prettier: '>=3.0.0'
 
-  ts-type-forge@2.4.0:
-    resolution: {integrity: sha512-YwDGgDzkqcsvF+YxmqRMnXEd9YfytLkBt6o1iRAmVx6+MJEhRCVD0bLTBu0WEn3iEzOByEkXdvaOi2XrDv9qgA==}
-    engines: {node: '>=20.11.0', pnpm: '>=8.0.0'}
+  ts-type-forge@2.4.1:
+    resolution: {integrity: sha512-T//uRe5vHUn+R/DYzPxT2iyDNW3BV1ZWVRNB5358/fsbx2828b/QNzM22CA3lJD/MdTJK0skoZHpNRf1qGiF3w==}
+    engines: {node: '>=22.12.0', pnpm: '>=9.0.0'}
 
   tsx@4.21.0:
     resolution: {integrity: sha512-5C1sg4USs1lfG0GFb2RLXsdpXqBSEhAaA/0kPL01wxzpMqLILNxIxIOKiILz+cdg/pLnOUxFYOR5yhHU666wbw==}
@@ -1415,7 +1415,7 @@ snapshots:
     dependencies:
       '@octokit/openapi-types': 27.0.0
 
-  '@sindresorhus/is@7.2.0': {}
+  '@sindresorhus/is@8.0.0': {}
 
   '@sindresorhus/merge-streams@4.0.0': {}
 
@@ -1667,13 +1667,13 @@ snapshots:
 
   git-hooks-list@4.2.1: {}
 
-  github-settings-as-code@1.2.3(typescript@5.9.3):
+  github-settings-as-code@1.2.7(typescript@5.9.3):
     dependencies:
       '@octokit/core': 7.0.6
       dotenv: 17.4.2
-      octokit-safe-types: 1.2.14(typescript@5.9.3)
-      ts-data-forge: 6.9.0(typescript@5.9.3)
-      ts-fortress: 7.0.2(typescript@5.9.3)
+      octokit-safe-types: 1.2.16(typescript@5.9.3)
+      ts-data-forge: 6.9.2(typescript@5.9.3)
+      ts-fortress: 7.0.3(typescript@5.9.3)
     transitivePeerDependencies:
       - typescript
 
@@ -1969,12 +1969,12 @@ snapshots:
 
   ms@2.1.3: {}
 
-  octokit-safe-types@1.2.14(typescript@5.9.3):
+  octokit-safe-types@1.2.16(typescript@5.9.3):
     dependencies:
       '@octokit/openapi-types': 27.0.0
       '@octokit/types': 16.0.0
-      ts-data-forge: 6.9.0(typescript@5.9.3)
-      ts-fortress: 7.0.2(typescript@5.9.3)
+      ts-data-forge: 6.9.2(typescript@5.9.3)
+      ts-fortress: 7.0.3(typescript@5.9.3)
     transitivePeerDependencies:
       - typescript
 
@@ -2055,36 +2055,36 @@ snapshots:
     dependencies:
       is-number: 7.0.0
 
-  ts-data-forge@6.9.0(typescript@5.9.3):
+  ts-data-forge@6.9.2(typescript@5.9.3):
     dependencies:
-      '@sindresorhus/is': 7.2.0
-      ts-type-forge: 2.4.0
+      '@sindresorhus/is': 8.0.0
+      ts-type-forge: 2.4.1
       typescript: 5.9.3
 
-  ts-fortress@7.0.2(typescript@5.9.3):
+  ts-fortress@7.0.3(typescript@5.9.3):
     dependencies:
-      '@sindresorhus/is': 7.2.0
-      ts-data-forge: 6.9.0(typescript@5.9.3)
-      ts-type-forge: 2.4.0
+      '@sindresorhus/is': 8.0.0
+      ts-data-forge: 6.9.2(typescript@5.9.3)
+      ts-type-forge: 2.4.1
     transitivePeerDependencies:
       - typescript
 
-  ts-repo-utils@9.0.1(prettier@3.8.3)(typescript@5.9.3):
+  ts-repo-utils@10.0.0(prettier@3.8.3)(typescript@5.9.3):
     dependencies:
       '@nodelib/fs.walk': 3.0.1
-      '@sindresorhus/is': 7.2.0
+      '@sindresorhus/is': 8.0.0
       '@types/micromatch': 4.0.10
       cmd-ts: 0.15.0
       fast-glob: 3.3.3
       micromatch: 4.0.8
       prettier: 3.8.3
-      ts-data-forge: 6.9.0(typescript@5.9.3)
+      ts-data-forge: 6.9.2(typescript@5.9.3)
       tsx: 4.21.0
     transitivePeerDependencies:
       - supports-color
       - typescript
 
-  ts-type-forge@2.4.0: {}
+  ts-type-forge@2.4.1: {}
 
   tsx@4.21.0:
     dependencies:
