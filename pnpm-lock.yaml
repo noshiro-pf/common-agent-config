@@ -12,8 +12,8 @@ importers:
         specifier: 10.0.0
         version: 10.0.0
       github-settings-as-code:
-        specifier: 1.2.8
-        version: 1.2.8(typescript@5.9.3)
+        specifier: 1.2.9
+        version: 1.2.9(typescript@5.9.3)
       markdownlint:
         specifier: 0.40.0
         version: 0.40.0
@@ -30,8 +30,8 @@ importers:
         specifier: 3.0.2
         version: 3.0.2(prettier@3.8.3)
       ts-repo-utils:
-        specifier: 10.0.2
-        version: 10.0.2(prettier@3.8.3)(typescript@5.9.3)
+        specifier: 10.0.3
+        version: 10.0.3(prettier@3.8.3)(typescript@5.9.3)
 
 packages:
 
@@ -472,16 +472,12 @@ packages:
     resolution: {integrity: sha512-KMQIfq5sOPpkQYajXHwnhjCC0slzCNScLHs9JafXc4RAJI+9f+jNDlBNaIMTvazOPLgb4BnlhGJOTbnN0wIjPw==}
     engines: {node: '>= 20'}
 
-  '@octokit/request@10.0.8':
-    resolution: {integrity: sha512-SJZNwY9pur9Agf7l87ywFi14W+Hd9Jg6Ifivsd33+/bGUQIjNujdFiXII2/qSlN2ybqUHfp5xpekMEjIBTjlSw==}
+  '@octokit/request@10.0.9':
+    resolution: {integrity: sha512-o8Bi3f608eyM+7BmBiUWxFsdjLb3/ym1cQek5LZOv9KkZcxRrHCPhhRzm6xjO6HVZ85ItD6+sTsjxo821SVa/A==}
     engines: {node: '>= 20'}
 
   '@octokit/types@16.0.0':
     resolution: {integrity: sha512-sKq+9r1Mm4efXW1FCk7hFSeJo4QKreL/tTbR0rz/qx/r1Oa2VV83LTA/H/MuCOX7uCIJmQVRKBcbmWoySjAnSg==}
-
-  '@sindresorhus/is@8.0.0':
-    resolution: {integrity: sha512-YvOsokBE5NsyHuXMnwEVB7lgFk6lX8F4OXCruYVgFII0hUHof0RGUvhMoabVt9hRqbg+qVzayzEG24RCcxcYeA==}
-    engines: {node: '>=22'}
 
   '@sindresorhus/is@8.1.0':
     resolution: {integrity: sha512-2SX/1jW6CIMAiebvVv5ZInoCEuWQmMyBoJXXGC6Vjakjp/fpxP5eHs7/V6WKuPEIbuK06+VpjH+vjLQhr98rDQ==}
@@ -557,6 +553,10 @@ packages:
   comment-json@4.6.2:
     resolution: {integrity: sha512-R2rze/hDX30uul4NZoIZ76ImSJLFxn/1/ZxtKC1L77y2X1k+yYu1joKbAtMA2Fg3hZrTOiw0I5mwVMo0cf250w==}
     engines: {node: '>= 6'}
+
+  content-type@2.0.0:
+    resolution: {integrity: sha512-j/O/d7GcZCyNl7/hwZAb606rzqkyvaDctLmckbxLzHvFBzTJHuGEdodATcP3yIRoDrLHkIATJuvzbFlp/ki2cQ==}
+    engines: {node: '>=18'}
 
   cspell-config-lib@10.0.0:
     resolution: {integrity: sha512-HWK7SRnJ3N/kOThw/uzmXmQYCzBxu58Jkq2hHyte1voDl118BeNFoaNRWMpYdHbBi3kCj8gaZu8wGtm+Zmdhxw==}
@@ -693,8 +693,8 @@ packages:
     resolution: {integrity: sha512-omMVniXEXpdx/vKxGnPRoO2394Otlze28TyxECbFVyoSpZ9H3EO7lemjcB12OpQJzRW4e5tt/dL1rOxry6aMHg==}
     engines: {node: '>=20'}
 
-  get-east-asian-width@1.5.0:
-    resolution: {integrity: sha512-CQ+bEO+Tva/qlmw24dCejulK5pMzVnUOFOijVogd3KQs07HnRIgp8TGipvCCRT06xeYEbpbgwaCxglFyiuIcmA==}
+  get-east-asian-width@1.6.0:
+    resolution: {integrity: sha512-QRbvDIbx6YklUe6RxeTeleMR0yv3cYH6PsPZHcnVn7xv7zO1BHN8r0XETu8n6Ye3Q+ahtSarc3WgtNWmehIBfA==}
     engines: {node: '>=18'}
 
   get-tsconfig@4.14.0:
@@ -703,8 +703,8 @@ packages:
   git-hooks-list@4.2.1:
     resolution: {integrity: sha512-WNvqJjOxxs/8ZP9+DWdwWJ7cDsd60NHf39XnD82pDVrKO5q7xfPqpkK6hwEAmBa/ZSEE4IOoR75EzbbIuwGlMw==}
 
-  github-settings-as-code@1.2.8:
-    resolution: {integrity: sha512-cfYjDQXw7Eup3dRjgSDDIRw9RDLGegoeuDlX0wriRiYn9yQs+bUMUQ8s1k/S6R6OUpVHwiKS0Y/SZ3Dq4glyCw==}
+  github-settings-as-code@1.2.9:
+    resolution: {integrity: sha512-WBVvCqCwJ3dHI8yvfd76pFK236iQkGUCfPY+EYif6OJmB0MROTZFaxAM9GplrtnT6WIU+tRSoXeJaPPgle53qQ==}
     engines: {node: '>=22.18.0', pnpm: '>=9.0.0'}
     hasBin: true
 
@@ -899,8 +899,8 @@ packages:
   ms@2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
 
-  octokit-safe-types@1.2.17:
-    resolution: {integrity: sha512-4x1gYCEJ/a4fh7WLVPDWhAm2yiAQgf0pZeJ9Ad/Xm530RcMpPg37TP8Ktd8vLU2FqBh6E9UfsUIIxRzzBv6DSg==}
+  octokit-safe-types@1.2.18:
+    resolution: {integrity: sha512-hl7mlRsJ+7/nNhA7wVYAAgbFRaKHJGG4tFakm+8pVBfrZvhTapHcB4KQcc+G7UwT2SfhqcmnGR3DVNGl/TE35w==}
     engines: {node: '>=22.18.0', pnpm: '>=9.0.0'}
 
   parse-entities@4.0.2:
@@ -958,8 +958,8 @@ packages:
   run-parallel@1.2.0:
     resolution: {integrity: sha512-5l4VyZR86LZ/lDxZTR6jqL8AFE2S0IFLMP26AbjsLVADxHdhB/c0GUsH+y39UfCi3dzz8OlQuPmnaJOMoDHQBA==}
 
-  semver@7.7.4:
-    resolution: {integrity: sha512-vFKC2IEtQnVhpT78h1Yp8wzwrf8CM+MzKMHGJZfBtzhZNycRFnXsHk6E5TxIkkMsgNS7mdX3AGB7x2QM2di4lA==}
+  semver@7.8.0:
+    resolution: {integrity: sha512-AcM7dV/5ul4EekoQ29Agm5vri8JNqRyj39o0qpX6vDF2GZrtutZl5RwgD1XnZjiTAfncsJhMI48QQH3sN87YNA==}
     engines: {node: '>=10'}
     hasBin: true
 
@@ -995,29 +995,25 @@ packages:
     resolution: {integrity: sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==}
     engines: {node: '>=8.0'}
 
-  ts-data-forge@6.9.4:
-    resolution: {integrity: sha512-18jGsOuEUnjfCWndXNpaaeTtU7wnL87tw+xaRjrn3MduTXtrCtC35EGxqTSNL+uY/Uahv60wBClg2ctBDAARPA==}
+  ts-data-forge@6.9.6:
+    resolution: {integrity: sha512-+FmX9f3GJc22nidNw0FCnCZqcl54c2uRnhbUa+KP9KB8prCSeZ6fyi+89QJ0bniR/J0X1KDoIOwWxS88a+TRLQ==}
     engines: {node: '>=22.18.0', pnpm: '>=9.0.0'}
     peerDependencies:
       typescript: '>=4.8'
 
-  ts-fortress@7.0.5:
-    resolution: {integrity: sha512-LuPLmaPJNLOvZMD6xGcD//rCsFqBNJC5h3FB285u4SbhXxrsInfSKpWBf3bcBlz10Hp3XZfXO5yPEx8ymeLBgA==}
+  ts-fortress@7.0.7:
+    resolution: {integrity: sha512-eRmokAhBY4dvUarI9lK7VlRFS4e1Ld60yl1PRDYKttzIa1LjsYL4bOqMtiAx5qgK/zra0z1lqGWXvH0mpTkSmA==}
     engines: {node: '>=22.18.0', pnpm: '>=9.0.0'}
 
-  ts-fortress@7.0.6:
-    resolution: {integrity: sha512-IIE0RUP0cp9t0xCGOcQRQ1bzMJ24cPmmJXi9hS7dGwFHxi0vzp4Srsvvfmazjj+s4r06jyJMzJwj8w7IpKteOw==}
-    engines: {node: '>=22.18.0', pnpm: '>=9.0.0'}
-
-  ts-repo-utils@10.0.2:
-    resolution: {integrity: sha512-AJqS7jhUzSwobfc5HtfR2YVZ0mCmtjJCoIFRVPj7zBDpHKDFuuqK1zHjOIDHeAMiN3XuFVX38p8KR0k5z8+UDg==}
+  ts-repo-utils@10.0.3:
+    resolution: {integrity: sha512-c3LKElOz+stA1RxdjYm0j9Sqxf4o0i/MS+EAusOLlW/Kx8+jQZAKhdkMuA++0RRWkKoyCwack60JUuX3SSIAuA==}
     engines: {node: '>=22.18.0', pnpm: '>=8.0.0'}
     hasBin: true
     peerDependencies:
       prettier: '>=3.0.0'
 
-  ts-type-forge@3.0.0:
-    resolution: {integrity: sha512-IKPxTv7Ng4GHTOYkCP2XHL0REZ+OWQ4ArNsDfwY9/KGp3hPwuUW+Vp4d5pRQ4NXsbe6MKU/Rv4Tgmy8xyVMyQA==}
+  ts-type-forge@3.0.1:
+    resolution: {integrity: sha512-nld+c93luAnZI5HYydZZl2eWWOe19Pv7NiniXdyDoemGviplah1HUN4pFNoa0PJw3SBDIfewExuZU9Eqsv7oSQ==}
     engines: {node: '>=22.18.0', pnpm: '>=9.0.0'}
 
   tsx@4.21.0:
@@ -1050,8 +1046,8 @@ packages:
     resolution: {integrity: sha512-GCPAHLvrIH13+c0SuacwvRYj2SxJXQ4kaVTT5xgL3kPrz56XxkF21IGhjSE1+W0aw7gpBWRGXLCPnPby6lSpmQ==}
     engines: {node: '>=12'}
 
-  yaml@2.8.3:
-    resolution: {integrity: sha512-AvbaCLOO2Otw/lW5bmh9d/WEdcDFdQp2Z2ZUH3pX9U2ihyUY0nvLv7J6TrWowklRGPYbB/IuIMfYgxaCPg5Bpg==}
+  yaml@2.9.0:
+    resolution: {integrity: sha512-2AvhNX3mb8zd6Zy7INTtSpl1F15HW6Wnqj0srWlkKLcpYl/gMIMJiyuGq2KeI2YFxUPjdlB+3Lc10seMLtL4cA==}
     engines: {node: '>= 14.6'}
     hasBin: true
 
@@ -1387,7 +1383,7 @@ snapshots:
     dependencies:
       '@octokit/auth-token': 6.0.0
       '@octokit/graphql': 9.0.3
-      '@octokit/request': 10.0.8
+      '@octokit/request': 10.0.9
       '@octokit/request-error': 7.1.0
       '@octokit/types': 16.0.0
       before-after-hook: 4.0.0
@@ -1400,7 +1396,7 @@ snapshots:
 
   '@octokit/graphql@9.0.3':
     dependencies:
-      '@octokit/request': 10.0.8
+      '@octokit/request': 10.0.9
       '@octokit/types': 16.0.0
       universal-user-agent: 7.0.3
 
@@ -1410,11 +1406,12 @@ snapshots:
     dependencies:
       '@octokit/types': 16.0.0
 
-  '@octokit/request@10.0.8':
+  '@octokit/request@10.0.9':
     dependencies:
       '@octokit/endpoint': 11.0.3
       '@octokit/request-error': 7.1.0
       '@octokit/types': 16.0.0
+      content-type: 2.0.0
       fast-content-type-parse: 3.0.0
       json-with-bigint: 3.5.8
       universal-user-agent: 7.0.3
@@ -1422,8 +1419,6 @@ snapshots:
   '@octokit/types@16.0.0':
     dependencies:
       '@octokit/openapi-types': 27.0.0
-
-  '@sindresorhus/is@8.0.0': {}
 
   '@sindresorhus/is@8.1.0': {}
 
@@ -1487,12 +1482,14 @@ snapshots:
       array-timsort: 1.0.3
       esprima: 4.0.1
 
+  content-type@2.0.0: {}
+
   cspell-config-lib@10.0.0:
     dependencies:
       '@cspell/cspell-types': 10.0.0
       comment-json: 4.6.2
       smol-toml: 1.6.1
-      yaml: 2.8.3
+      yaml: 2.9.0
 
   cspell-dictionary@10.0.0:
     dependencies:
@@ -1574,7 +1571,7 @@ snapshots:
       cspell-lib: 10.0.0
       fast-json-stable-stringify: 2.1.0
       flatted: 3.4.2
-      semver: 7.7.4
+      semver: 7.8.0
       tinyglobby: 0.2.16
 
   debug@4.4.3:
@@ -1669,7 +1666,7 @@ snapshots:
 
   gensequence@8.0.8: {}
 
-  get-east-asian-width@1.5.0: {}
+  get-east-asian-width@1.6.0: {}
 
   get-tsconfig@4.14.0:
     dependencies:
@@ -1677,14 +1674,14 @@ snapshots:
 
   git-hooks-list@4.2.1: {}
 
-  github-settings-as-code@1.2.8(typescript@5.9.3):
+  github-settings-as-code@1.2.9(typescript@5.9.3):
     dependencies:
       '@octokit/core': 7.0.6
       dotenv: 17.4.2
-      octokit-safe-types: 1.2.17(typescript@5.9.3)
-      ts-data-forge: 6.9.4(typescript@5.9.3)
-      ts-fortress: 7.0.6(typescript@5.9.3)
-      ts-type-forge: 3.0.0
+      octokit-safe-types: 1.2.18(typescript@5.9.3)
+      ts-data-forge: 6.9.6(typescript@5.9.3)
+      ts-fortress: 7.0.7(typescript@5.9.3)
+      ts-type-forge: 3.0.1
     transitivePeerDependencies:
       - typescript
 
@@ -1980,13 +1977,13 @@ snapshots:
 
   ms@2.1.3: {}
 
-  octokit-safe-types@1.2.17(typescript@5.9.3):
+  octokit-safe-types@1.2.18(typescript@5.9.3):
     dependencies:
       '@octokit/openapi-types': 27.0.0
       '@octokit/types': 16.0.0
-      ts-data-forge: 6.9.4(typescript@5.9.3)
-      ts-fortress: 7.0.5(typescript@5.9.3)
-      ts-type-forge: 3.0.0
+      ts-data-forge: 6.9.6(typescript@5.9.3)
+      ts-fortress: 7.0.7(typescript@5.9.3)
+      ts-type-forge: 3.0.1
     transitivePeerDependencies:
       - typescript
 
@@ -2031,7 +2028,7 @@ snapshots:
     dependencies:
       queue-microtask: 1.2.3
 
-  semver@7.7.4: {}
+  semver@7.8.0: {}
 
   slash@5.1.0: {}
 
@@ -2045,13 +2042,13 @@ snapshots:
       detect-newline: 4.0.1
       git-hooks-list: 4.2.1
       is-plain-obj: 4.1.0
-      semver: 7.7.4
+      semver: 7.8.0
       sort-object-keys: 2.1.0
       tinyglobby: 0.2.16
 
   string-width@8.1.0:
     dependencies:
-      get-east-asian-width: 1.5.0
+      get-east-asian-width: 1.6.0
       strip-ansi: 7.2.0
 
   strip-ansi@7.2.0:
@@ -2067,45 +2064,37 @@ snapshots:
     dependencies:
       is-number: 7.0.0
 
-  ts-data-forge@6.9.4(typescript@5.9.3):
+  ts-data-forge@6.9.6(typescript@5.9.3):
     dependencies:
       '@sindresorhus/is': 8.1.0
-      ts-type-forge: 3.0.0
+      ts-type-forge: 3.0.1
       typescript: 5.9.3
 
-  ts-fortress@7.0.5(typescript@5.9.3):
+  ts-fortress@7.0.7(typescript@5.9.3):
     dependencies:
       '@sindresorhus/is': 8.1.0
-      ts-data-forge: 6.9.4(typescript@5.9.3)
-      ts-type-forge: 3.0.0
+      ts-data-forge: 6.9.6(typescript@5.9.3)
+      ts-type-forge: 3.0.1
     transitivePeerDependencies:
       - typescript
 
-  ts-fortress@7.0.6(typescript@5.9.3):
-    dependencies:
-      '@sindresorhus/is': 8.0.0
-      ts-data-forge: 6.9.4(typescript@5.9.3)
-      ts-type-forge: 3.0.0
-    transitivePeerDependencies:
-      - typescript
-
-  ts-repo-utils@10.0.2(prettier@3.8.3)(typescript@5.9.3):
+  ts-repo-utils@10.0.3(prettier@3.8.3)(typescript@5.9.3):
     dependencies:
       '@nodelib/fs.walk': 3.0.1
-      '@sindresorhus/is': 8.0.0
+      '@sindresorhus/is': 8.1.0
       '@types/micromatch': 4.0.10
       cmd-ts: 0.15.0
       fast-glob: 3.3.3
       micromatch: 4.0.8
       prettier: 3.8.3
-      ts-data-forge: 6.9.4(typescript@5.9.3)
-      ts-type-forge: 3.0.0
+      ts-data-forge: 6.9.6(typescript@5.9.3)
+      ts-type-forge: 3.0.1
       tsx: 4.21.0
     transitivePeerDependencies:
       - supports-color
       - typescript
 
-  ts-type-forge@3.0.0: {}
+  ts-type-forge@3.0.1: {}
 
   tsx@4.21.0:
     dependencies:
@@ -2128,4 +2117,4 @@ snapshots:
 
   xdg-basedir@5.1.0: {}
 
-  yaml@2.8.3: {}
+  yaml@2.9.0: {}
