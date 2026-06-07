@@ -20,7 +20,7 @@
     "md": "markdownlint-cli2"
   },
   "devDependencies": {
-    "cspell": "10.0.0",
+    "cspell": "10.0.1",
     "github-settings-as-code": "1.2.9",
     "markdownlint": "0.40.0",
     "markdownlint-cli2": "0.22.1",
