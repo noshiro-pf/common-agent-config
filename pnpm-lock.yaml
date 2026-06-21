@@ -21,17 +21,17 @@ importers:
         specifier: 0.22.1
         version: 0.22.1
       prettier:
-        specifier: 3.8.3
-        version: 3.8.3
+        specifier: 3.8.4
+        version: 3.8.4
       prettier-plugin-organize-imports:
         specifier: 4.3.0
-        version: 4.3.0(prettier@3.8.3)(typescript@5.9.3)
+        version: 4.3.0(prettier@3.8.4)(typescript@5.9.3)
       prettier-plugin-packagejson:
         specifier: 3.0.2
-        version: 3.0.2(prettier@3.8.3)
+        version: 3.0.2(prettier@3.8.4)
       ts-repo-utils:
         specifier: 10.1.2
-        version: 10.1.2(prettier@3.8.3)(typescript@5.9.3)
+        version: 10.1.2(prettier@3.8.4)(typescript@5.9.3)
 
 packages:
 
@@ -933,8 +933,8 @@ packages:
       prettier:
         optional: true
 
-  prettier@3.8.3:
-    resolution: {integrity: sha512-7igPTM53cGHMW8xWuVTydi2KO233VFiTNyF5hLJqpilHfmn8C8gPf+PS7dUT64YcXFbiMGZxS9pCSxL/Dxm/Jw==}
+  prettier@3.8.4:
+    resolution: {integrity: sha512-N2MylSdi48+5N/6S5j+maeHbUSIzzZ5uOcX5Hm4QpV8Dkb1HFjfAKTKX6yNPJQD9AhcT3ifHNB66tWTTJDi11Q==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -2017,18 +2017,18 @@ snapshots:
 
   picomatch@4.0.4: {}
 
-  prettier-plugin-organize-imports@4.3.0(prettier@3.8.3)(typescript@5.9.3):
+  prettier-plugin-organize-imports@4.3.0(prettier@3.8.4)(typescript@5.9.3):
     dependencies:
-      prettier: 3.8.3
+      prettier: 3.8.4
       typescript: 5.9.3
 
-  prettier-plugin-packagejson@3.0.2(prettier@3.8.3):
+  prettier-plugin-packagejson@3.0.2(prettier@3.8.4):
     dependencies:
       sort-package-json: 3.6.1
     optionalDependencies:
-      prettier: 3.8.3
+      prettier: 3.8.4
 
-  prettier@3.8.3: {}
+  prettier@3.8.4: {}
 
   punycode.js@2.3.1: {}
 
@@ -2097,7 +2097,7 @@ snapshots:
     transitivePeerDependencies:
       - typescript
 
-  ts-repo-utils@10.1.2(prettier@3.8.3)(typescript@5.9.3):
+  ts-repo-utils@10.1.2(prettier@3.8.4)(typescript@5.9.3):
     dependencies:
       '@nodelib/fs.walk': 3.0.1
       '@sindresorhus/is': 8.1.0
@@ -2105,7 +2105,7 @@ snapshots:
       cmd-ts: 0.15.0
       fast-glob: 3.3.3
       micromatch: 4.0.8
-      prettier: 3.8.3
+      prettier: 3.8.4
       ts-data-forge: 6.9.6(typescript@5.9.3)
       ts-type-forge: 3.1.0
       tsx: 4.22.4
