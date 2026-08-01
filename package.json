@@ -6,7 +6,7 @@
   "license": "ISC",
   "author": "noshiro-pf",
   "scripts": {
-    "cspell": "cspell \"**\" --gitignore --gitignore-root ./ --no-progress",
+    "cspell": "cspell \"{**/*,.changeset/**/*,.github/**/*}\" --gitignore --gitignore-root ./ --no-progress",
     "fmt": "format-uncommitted",
     "fmt:diff": "format-diff-from origin/main",
     "fmt:full": "prettier --write .",
