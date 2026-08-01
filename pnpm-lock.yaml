@@ -15,8 +15,8 @@ importers:
         specifier: 1.2.9
         version: 1.2.9(typescript@5.9.3)
       markdownlint:
-        specifier: 0.41.0
-        version: 0.41.0
+        specifier: 0.41.1
+        version: 0.41.1
       markdownlint-cli2:
         specifier: 0.23.1
         version: 0.23.1
@@ -802,10 +802,6 @@ packages:
     resolution: {integrity: sha512-20JPI5W+HpV1OA+pUM712wgvL4GzYNUvbmhLU8KlEYJ1kCDx4soZ4/Xqd+WkLrPTOKMAn8SfO3zYFrK8GLlwQg==}
     engines: {node: '>=22'}
     hasBin: true
-
-  markdownlint@0.41.0:
-    resolution: {integrity: sha512-xMUI3ChBuRuxuLF4ENvCZyS8z/+Jly1coUcZwErKLIB3sDj7ojpaTBa1e9YVPhSN4jGEIjYGQCldbTJS/hqS+A==}
-    engines: {node: '>=22'}
 
   markdownlint@0.41.1:
     resolution: {integrity: sha512-qHKeU2E1bdyNAT077go2FVTNXvYcktN5IHtF6XyeD1l0PClxzSp2tUApAV14ORI8DGX4H9bNKZEzelZp4qn8IA==}
@@ -1779,20 +1775,6 @@ snapshots:
       markdownlint-cli2-formatter-default: 0.0.6(markdownlint-cli2@0.23.1)
       micromatch: 4.0.8
       smol-toml: 1.7.0
-    transitivePeerDependencies:
-      - supports-color
-
-  markdownlint@0.41.0:
-    dependencies:
-      micromark: 4.0.2
-      micromark-core-commonmark: 2.0.3
-      micromark-extension-directive: 4.0.0
-      micromark-extension-gfm-autolink-literal: 2.1.0
-      micromark-extension-gfm-footnote: 2.1.0
-      micromark-extension-gfm-table: 2.1.1
-      micromark-extension-math: 3.1.0
-      micromark-util-types: 2.0.2
-      string-width: 8.2.1
     transitivePeerDependencies:
       - supports-color
 
