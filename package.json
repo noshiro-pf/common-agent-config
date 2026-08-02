@@ -17,7 +17,8 @@
     "gh:backup-all": "gh-backup-all",
     "gh:backup-repository-settings": "gh-backup-repository-settings",
     "gh:backup-rulesets": "gh-backup-rulesets",
-    "md": "markdownlint-cli2"
+    "md": "markdownlint-cli2",
+    "update-packages": "pnpm update --latest"
   },
   "devDependencies": {
     "cspell": "10.0.1",
