@@ -16,13 +16,13 @@
   },
   "devDependencies": {
     "cspell": "10.0.1",
-    "github-settings-as-code": "2.0.1",
+    "github-settings-as-code": "2.1.0",
     "markdownlint": "0.41.1",
-    "markdownlint-cli2": "0.23.1",
-    "prettier": "3.9.5",
+    "markdownlint-cli2": "0.23.2",
+    "prettier": "3.9.6",
     "prettier-plugin-organize-imports": "4.3.0",
     "prettier-plugin-packagejson": "3.0.2",
-    "ts-repo-utils": "10.1.2"
+    "ts-repo-utils": "10.1.7"
   },
   "packageManager": "pnpm@11.20.0",
   "engines": {
